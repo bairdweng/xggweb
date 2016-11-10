@@ -1,7 +1,7 @@
 /**
  * Created by baird on 2016/11/9.
  */
-$.get("/toutiao",function(response){
+$.get("http://123.207.47.17/toutiao/index?type=&key=cee8d108ce2da022b1a011d68eee0743",function(response){
     var data = response['result']['data'];
     console.log(data);
     for (var i=0;i<data.length;i++){

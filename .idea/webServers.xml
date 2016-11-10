@@ -2,7 +2,7 @@
 <project version="4">
   <component name="WebServers">
     <option name="servers">
-      <webServer id="3026a444-b17d-4de3-844e-efe14f615ff2" name="腾讯云网站" url="http://123.207.47.17">
+      <webServer id="08acaf86-0746-4a20-8c69-93368f14c780" name="腾讯云" url="http://123.207.47.17">
         <fileTransfer host="123.207.47.17" port="22" accessType="SFTP">
           <advancedOptions>
             <advancedOptions dataProtectionLevel="Private" />
@@ -10,7 +10,7 @@
           <option name="port" value="22" />
         </fileTransfer>
       </webServer>
-      <webServer id="05f637cd-f6bf-4ea5-b7c7-7d0d6c059406" name="本地测试" url="http://localhost">
+      <webServer id="b943a883-537d-4636-a880-710a6c468867" name="本地测试" url="http://localhost:63342">
         <fileTransfer port="0" mountedRoot="$PROJECT_DIR$" accessType="MOUNT" />
       </webServer>
     </option>
