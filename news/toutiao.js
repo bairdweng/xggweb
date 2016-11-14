@@ -1,6 +1,8 @@
 /**
  * Created by baird on 2016/11/9.
  */
+
+
 $.showIndicator()
 $.get("http://123.207.47.17/xgg/news",function(response){
     var data = response['result']['data'];
@@ -21,4 +23,9 @@ $.get("http://123.207.47.17/xgg/news",function(response){
         $("#mylist").append(html);
     }
 });
+
+$.init();
+
+
+
 
