@@ -1,9 +1,10 @@
 /**
  * Created by baird on 2016/11/9.
  */
-$.get("/xgg/news",function(response){
+$.showIndicator()
+$.get("http://123.207.47.17/xgg/news",function(response){
     var data = response['result']['data'];
-    console.log(data);
+    $.hideIndicator()
     for (var i=0;i<data.length;i++){
         /*这里可以看到数组的每个对象*/
         var dataDic = data[i];

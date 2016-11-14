@@ -1,9 +1,11 @@
 /**
  * Created by baird on 2016/11/9.
  */
-$.get("http://123.207.47.17/toutiao/index?type=&key=cee8d108ce2da022b1a011d68eee0743",function(response){
+$.showIndicator()
+$.get("http://123.207.47.17/xgg/news",function(response){
     var data = response['result']['data'];
     console.log(data);
+    $.hideIndicator()
     for (var i=0;i<data.length;i++){
         /*这里可以看到数组的每个对象*/
         var dataDic = data[i];
@@ -16,7 +18,6 @@ $.get("http://123.207.47.17/toutiao/index?type=&key=cee8d108ce2da022b1a011d68eee
             '<img class="card-cover"' + 'src=' + thumbnail_pic_s + '>'+
             '</div>' +
             '</div>';
-
         $("#mylist").append(html);
     }
 });
