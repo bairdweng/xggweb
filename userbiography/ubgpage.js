@@ -1,7 +1,7 @@
 /**
  * Created by baird on 2016/11/9.
  */
-$.get("/toutiao",function(response){
+$.get("/xgg/news",function(response){
     var data = response['result']['data'];
     console.log(data);
     for (var i=0;i<data.length;i++){
@@ -16,7 +16,6 @@ $.get("/toutiao",function(response){
             '<img class="card-cover"' + 'src=' + thumbnail_pic_s + '>'+
             '</div>' +
             '</div>';
-
         $("#mylist").append(html);
     }
 });
