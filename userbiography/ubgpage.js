@@ -18,13 +18,14 @@ $.post("http://123.207.47.17/xgg/getdetailedinfo",{
         else {
             livecity = "现住地：" + livecity;
         }
+        var face = baseinfo['face'];
         var html1 =
         '<div class="card-content">'+
         '<div class="list-block media-list">'+'' +
         '<ul>'+
         '<li class="item-content">'+
         '<div class="item-media">' +
-        '<img  class="userface" src= ' + ' "http://gqianniu.alicdn.com/bao/uploaded/i4//tfscom/i3/TB10LfcHFXXXXXKXpXXXXXXXXXX_!!0-item_pic.jpg_250x250q60.jpg"> '+
+        '<img  class="userface" src=' + face + '>' +
         '</div>'+
         '<div class="item-inner">'+
         '<div class="item-title-row">'+
@@ -91,7 +92,6 @@ $.post("http://123.207.47.17/xgg/getthestory",{
 function getLocalTime(nS) {
     return new Date(parseInt(nS) * 1000).toLocaleString().replace(/:\d{1,2}$/,' ');
 }
-
 function getQueryString(name) {
     var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
     var r = window.location.search.substr(1).match(reg);
