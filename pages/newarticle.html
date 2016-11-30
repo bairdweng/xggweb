@@ -13,13 +13,21 @@
 </head>
 <body>
 <div class="content">
-    <div class="content-block">
-            <div id="myinput">
+    <div class="content-block" id="mylist">
+        <div id="mycontent">
+        </div>
+        <div class="row" id="myinput">
+            <div class="col-50">
+                <p><a href="#" class="button button-big button-round" id="addtext">添加文本</a></p>
             </div>
-        <p><a href="#" class="button button-big button-round" id="addtext">添加文本</a></p>
+            <div class="col-50">
+                <input class="a-upload" type="file" id="addpic" multiple/>
+                <p><a href="#" class="button button-big button-round">添加图片</a></p>
+            </div>
+        </div>
         <div class="col-100">
-            <input class="a-upload" type="file" id="addpic" multiple/>
-            <p><a href="#" class="button button-big button-round">添加图片</a></p>
+            <p><a href="#" class="button button-big button-round" id="addrelease">发布</a></p>
+        </div>
     </div>
 </div>
 <script type='text/javascript' src='//g.alicdn.com/sj/lib/zepto/zepto.min.js' charset='utf-8'></script>
