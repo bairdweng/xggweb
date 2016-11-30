@@ -8,3 +8,12 @@ div.item-subtitle{font-size: 14px;color: #666666}
 div.card-content-inner{font-size:15px;color: #666666}
 p.xgg-content{font-size:17px;color: #666666;letter-spacing: 1.5px}
 img.userface{width: 50px; height: 50px; border-radius: 25px}
+
+.t_area{
+    width:80px;
+    overflow-y:visible
+}
+.a-upload {
+    width:100%;
+    position:absolute; z-index:100; margin-left:0px; font-size:60px;opacity:0;filter:alpha(opacity=0); margin-top:-5px;
+}
