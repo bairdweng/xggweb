@@ -90,7 +90,9 @@ $("#addrelease").on('click',function (){
 })
 /*上传图片*/
 function upimage(a_id){
+    $.showPreloader('发布中')
     var uploadURL = "http://xggserve.com/xgg/uploadpicofart";
+    var up_index = 0;
     for(var i = 0;i<images.length;i++){
         //获取图片对象。
         var obj = images[i];
@@ -101,20 +103,45 @@ function upimage(a_id){
         var reader = new FileReader();
         reader.readAsDataURL(imgObj);
         reader.onload = function (){
-            var imgData = this.result; //base64数据
-            $.post(uploadURL,{
-                    uid:"3",
-                    articleid:a_id,
-                    index:index,
-                    img:imgData
-                },
-                function(data){
-                    console.log(data);
-                });
+            compressImg(this.result,300,function (imgData){
+                $.post(uploadURL,{
+                        uid:"3",
+                        articleid:a_id,
+                        index:index,
+                        img:imgData
+                    },
+                    function(data){
+                        up_index++;
+                        if (up_index == images.length){
+                            $.hidePreloader();
+                            $.toast("发布成功");
+                            window.location.href='/xggweb/pages/addthearticle.html';
+                        }
+                    });
+            });
         };
     }
 }
+function compressImg(imgData,maxHeight,onCompress){
+    if(!imgData)return;
+    onCompress = onCompress || function(){};
+    maxHeight = maxHeight || 200;//默认最大高度200px
+    var canvas = document.createElement('canvas');
+    var img = new Image();
+    img.onload = function(){
+        if(img.height > maxHeight) {//按最大高度等比缩放
+            img.width *= maxHeight / img.height;
 
+            img.height = maxHeight;
+        }
+        var ctx = canvas.getContext("2d");
+        ctx.clearRect(0, 0, canvas.width, canvas.height); // canvas清屏
+        //重置canvans宽高 canvas.width = img.width; canvas.height = img.height;
+        ctx.drawImage(img, 0, 0, img.width, img.height); // 将图像绘制到canvas上
+        onCompress(canvas.toDataURL("image/jpeg"));//必须等压缩完才读取canvas值，否则canvas内容是黑帆布
+    }
+    img.src = imgData;
+};
 
 
 
