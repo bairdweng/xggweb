@@ -103,7 +103,7 @@ function upimage(a_id){
         var reader = new FileReader();
         reader.readAsDataURL(imgObj);
         reader.onload = function (){
-            compressImg(this.result,300,function (imgData){
+            compressImg(this.result,1024,function (imgData){
                 $.post(uploadURL,{
                         uid:"3",
                         articleid:a_id,
