@@ -55,7 +55,8 @@ $("#addrelease").on('click',function (){
     }
     else{
         //添加文字
-       var uploadtextofart = "http://xggserve.com/xgg/uploadtextofart";
+        $.showPreloader('发布中')
+        var uploadtextofart = "http://xggserve.com/xgg/uploadtextofart";
        var texts = new Array();
        for(var i = 0;i<mycontent.length;i++){
            var listid = "#"+(i);
@@ -90,42 +91,55 @@ $("#addrelease").on('click',function (){
 })
 /*上传图片*/
 function upimage(a_id){
-    $.showPreloader('发布中')
-    var uploadURL = "http://xggserve.com/xgg/uploadpicofart";
-    var up_index = 0;
-    for(var i = 0;i<images.length;i++){
-        //获取图片对象。
-        var obj = images[i];
-        //图片对象
-        var imgObj = obj["imgObj"];
-        //图片索引。排序。
-        var index = obj["index"];
-        var reader = new FileReader();
-        reader.readAsDataURL(imgObj);
-        reader.onload = function (){
-            compressImg(this.result,1024,function (imgData){
+    if (images.length==0){
+        setTimeout(func,"1000");//三秒后执行
+        function func(){
+            $.hidePreloader();
+            $.toast("发布成功");
+        }
+        setTimeout(func2,"1000");
+        function func2(){
+            location.reload();
+        }
+    }
+    else{
+        var uploadURL = "http://xggserve.com/xgg/uploadpicofart";
+        var up_index = 0;
+        for(var i = 0;i<images.length;i++){
+            //获取图片对象。
+            var obj = images[i];
+            //图片对象
+            var imgObj = obj["imgObj"];
+            //图片索引。排序。
+            var index = obj["index"];
+            var reader = new FileReader();
+            reader.readAsDataURL(imgObj);
+            reader.onload = function (){
                 $.post(uploadURL,{
                         uid:"3",
                         articleid:a_id,
                         index:index,
-                        img:imgData
+                        img:this.result
                     },
-                    function(data){
+                    function(){
                         up_index++;
                         if (up_index == images.length){
                             $.hidePreloader();
                             $.toast("发布成功");
-                            window.location.href='/xggweb/pages/addthearticle.html';
+                            location.reload();
                         }
                     });
-            });
-        };
+                // compressImg(this.result,1024,function (imgData){
+                //
+                // });
+            };
+        }
     }
 }
 function compressImg(imgData,maxHeight,onCompress){
     if(!imgData)return;
     onCompress = onCompress || function(){};
-    maxHeight = maxHeight || 200;//默认最大高度200px
+    // maxHeight = maxHeight || 1024;//默认最大高度200px
     var canvas = document.createElement('canvas');
     var img = new Image();
     img.onload = function(){
@@ -138,6 +152,7 @@ function compressImg(imgData,maxHeight,onCompress){
         ctx.clearRect(0, 0, canvas.width, canvas.height); // canvas清屏
         //重置canvans宽高 canvas.width = img.width; canvas.height = img.height;
         ctx.drawImage(img, 0, 0, img.width, img.height); // 将图像绘制到canvas上
+        console.log("wide",img.width,"height",img.height);
         onCompress(canvas.toDataURL("image/jpeg"));//必须等压缩完才读取canvas值，否则canvas内容是黑帆布
     }
     img.src = imgData;
